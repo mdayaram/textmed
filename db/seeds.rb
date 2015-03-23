@@ -4,6 +4,7 @@
 # Temporary admin account
 u = User.new(
   email: "admin@example.com",
+  phone_number: PhonyRails.normalize_number("14158675309"),
   password: "1234",
   password_confirmation: "1234",
   admin: true
