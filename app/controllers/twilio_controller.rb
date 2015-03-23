@@ -17,6 +17,7 @@ class TwilioController < ApplicationController
   def sms
     sms_body = params["Body"]
     from_number = params["From"]
+    $stderr.puts "\n\n\n\n\nPHONE: #{from_number}\n\n\n\n"
     user = User.where(:phone_number => from_number)
     if !user.nil?
       @message = Message.new do |m|
