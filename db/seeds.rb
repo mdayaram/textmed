@@ -15,7 +15,7 @@ u.save!
 
 names = [ "Mako", "Korra", "Bolin", "Asami", "Aang", "Katara", "Toph", "Saka", "Zuko" ]
 # Test user accounts
-(1..50).each do |i|
+(1..10).each do |i|
   u = User.new(
     name: names[i % names.length],
     email: "user#{i}@example.com",
