@@ -22,10 +22,11 @@ class Admin::UsersController < Admin::BaseController
   def update
     old_email = @user.email
     new_params = user_params.dup
-    new_params[:email] = new_params[:email].strip
+    new_params[:email] = new_params[:email].strip unless new_params[:email].nil?
 
     @user.email = new_params[:email]
-    @user.name = new_params[:name]
+    @user.name = new_params[:name].strip unless new_params[:name].nil?
+    @user.phone_number = new_params[:phone_number].strip unless new_params[:phone_number].nil?
 
     if current_user.id != @user.id
       @user.admin = new_params[:admin]=="0" ? false : true
