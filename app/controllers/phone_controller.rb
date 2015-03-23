@@ -1,6 +1,5 @@
 class PhoneController < ApplicationController
   skip_before_action :verify_authenticity_token
-
   # temporary controller for testing.
   def sms
     u = User.find(params[:user])
