@@ -9,8 +9,8 @@ Textr::Application.routes.draw do
   namespace :admin do
     root "base#index"
     resources :users
+    resources :messages
   end
 
   post 'twilio/voice' => 'twilio#voice'
-  post 'phone/sms' => 'phone#sms'
 end
