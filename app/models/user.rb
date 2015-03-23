@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  has_many :messages
+  has_many :messages, -> { order "created_at" }
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -14,6 +14,14 @@ class User < ActiveRecord::Base
   validates_format_of :email, with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
   # :phone
   validates_plausible_phone :phone_number
+
+  def last_sent_message
+    Message.where(user_id: self.id, received: false).order(created_at: :desc).first
+  end
+
+  def last_received_message
+    Message.where(user_id: self.id, received: true).order(created_at: :desc).first
+  end
 
   def self.paged(page_number)
     order(admin: :desc, email: :asc).page page_number

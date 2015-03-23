@@ -20,6 +20,8 @@
 		<th>Name</th>
     <th>Email</th>
     <th>Phone</th>
+		<th>Last Contacted At</th>
+		<th>Last Replied At</th>
   </tr>
 
   <% @users.each do |user| %>
@@ -27,6 +29,8 @@
     <td><%= user.name %></td>
     <td><%= link_to user.email, admin_user_path(user) %></td>
     <td><%= user.phone_number.phony_formatted unless user.phone_number.nil? %></td>
+		<td><%= user.last_sent_message.nil? ? "none" : localize(user.last_sent_message.created_at, :format => :long) %></td>
+		<td><%= user.last_received_message.nil? ? "none" : localize(user.last_received_message.created_at, :format => :long) %></td>
   </tr>
 
   <% end %>
