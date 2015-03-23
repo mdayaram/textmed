@@ -7,7 +7,7 @@ class Admin::UsersController < Admin::BaseController
     :destroy
   ]
 
-  
+
   def index
     @users = User.search_and_order(params[:search], params[:page])
   end
@@ -25,8 +25,7 @@ class Admin::UsersController < Admin::BaseController
     new_params[:email] = new_params[:email].strip
 
     @user.email = new_params[:email]
-    @user.password = new_params[:password] if new_params[:password].strip.length > 0
-    @user.password_confirmation = new_params[:password_confirmation] if new_params[:password_confirmation].strip.length > 0
+    @user.name = new_params[:name]
 
     if current_user.id != @user.id
       @user.admin = new_params[:admin]=="0" ? false : true
@@ -55,11 +54,11 @@ class Admin::UsersController < Admin::BaseController
 
   def user_params
     params.require(:user).permit(
-    :email,
-    :password,
-    :password_confirmation,
-    :admin,
-    :locked
+      :email,
+      :password,
+      :password_confirmation,
+      :admin,
+      :locked
     )
   end
 
