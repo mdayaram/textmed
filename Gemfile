@@ -26,6 +26,9 @@ gem 'font-awesome-sass', '4.3.1'
 # Bootstrap 3: https://github.com/twbs/bootstrap-sass
 gem 'bootstrap-sass', '3.3.3'
 
+# Phone number validation and formatting
+gem 'phony_rails'
+
 group :development, :test do
   gem 'byebug', '3.5.1'
   gem 'web-console', '2.1.1'

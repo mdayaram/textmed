@@ -1,16 +1,18 @@
 class User < ActiveRecord::Base
-  
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, 
-  :recoverable, :rememberable, :trackable, :validatable, :confirmable
-  
+  devise :database_authenticatable,
+    :recoverable, :rememberable, :trackable, :validatable, :confirmable
+
   # Pagination
   paginates_per 100
 
   # Validations
   # :email
   validates_format_of :email, with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
+  # :phone
+  validates_plausible_phone :phone_number
 
   def self.paged(page_number)
     order(admin: :desc, email: :asc).page page_number
@@ -19,7 +21,7 @@ class User < ActiveRecord::Base
   def self.search_and_order(search, page_number)
     if search
       where("email LIKE ?", "%#{search.downcase}%").order(
-      admin: :desc, email: :asc
+        admin: :desc, email: :asc
       ).page page_number
     else
       order(admin: :desc, email: :asc).page page_number
@@ -32,7 +34,7 @@ class User < ActiveRecord::Base
 
   def self.last_signins(count)
     order(last_sign_in_at:
-    :desc).limit(count).select("id","email","last_sign_in_at")
+          :desc).limit(count).select("id","email","last_sign_in_at")
   end
 
   def self.users_count
