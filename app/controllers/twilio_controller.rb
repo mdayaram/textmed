@@ -26,5 +26,6 @@ class TwilioController < ApplicationController
       end
       @message.save!
     end
+    render :text => "ok"
   end
 end
