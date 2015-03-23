@@ -22,7 +22,7 @@ class TwilioController < ApplicationController
       @message = Message.new do |m|
         m.user_id = user.id
         m.received = true
-        m.body.body = sms_body
+        m.body = sms_body
       end
       @message.save!
     end
