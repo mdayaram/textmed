@@ -29,8 +29,8 @@ class Admin::UsersController < Admin::BaseController
     @user.phone_number = new_params[:phone_number].strip unless new_params[:phone_number].nil?
 
     if current_user.id != @user.id
-      @user.admin = new_params[:admin]=="0" ? false : true
-      @user.locked = new_params[:locked]=="0" ? false : true
+      @user.admin = new_params[:admin].to_i != 0
+      @user.locked = new_params[:locked].to_i != 0
     end
 
     if @user.valid?
@@ -55,6 +55,8 @@ class Admin::UsersController < Admin::BaseController
 
   def user_params
     params.require(:user).permit(
+      :name,
+      :phone_number,
       :email,
       :password,
       :password_confirmation,
