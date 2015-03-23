@@ -13,7 +13,12 @@ class User < ActiveRecord::Base
   # :email
   validates_format_of :email, with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
   # :phone
-  validates_plausible_phone :phone_number
+  validates_plausible_phone :phone_number, :presence => true
+  validates :phone_number, uniqueness: true
+
+  def phone_number=(new_num)
+    @phone_number = PhonyRails.normalize_number(new_num)
+  end
 
   def last_sent_message
     Message.where(user_id: self.id, received: false).order(created_at: :desc).first
@@ -29,7 +34,7 @@ class User < ActiveRecord::Base
 
   def self.search_and_order(search, page_number)
     if search
-      where("email LIKE ? or name LIKE ? or phone_number LIKE ?", "%#{search.downcase}%", "%#{search.downcase}%", "%#{search.downcase}%").order(
+      where("email LIKE %?% OR name LIKE %?% OR phone_number LIKE %?%", search.downcase,search.downcase, search.downcase).order(
         admin: :desc, email: :asc
       ).page page_number
     else
