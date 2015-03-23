@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   validates :phone_number, uniqueness: true
 
   def phone_number=(new_num)
-    @phone_number = PhonyRails.normalize_number(new_num)
+    self[:phone_number] = PhonyRails.normalize_number(new_num)
   end
 
   def last_sent_message
