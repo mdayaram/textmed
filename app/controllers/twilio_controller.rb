@@ -17,11 +17,7 @@ class TwilioController < ApplicationController
   def sms
     sms_body = params["Body"]
     from_number = PhonyRails.normalize_number(params["From"])
-    $stderr.puts "\n\n\n\n\n\n"
-    $stderr.puts "NUM: #{from_number}"
     user = User.where(:phone_number => from_number).first
-    $stderr.puts "USR: #{user.inspect}"
-    $stderr.puts "\n\n\n\n\n"
     if !user.nil?
       @message = Message.new do |m|
         m.user_id = user.id

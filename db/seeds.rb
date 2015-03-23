@@ -17,7 +17,7 @@ names = [ "Mako", "Korra", "Bolin", "Asami", "Aang", "Katara", "Toph", "Saka", "
   u = User.new(
     name: names[i % names.length],
     email: "user#{i}@example.com",
-    phone_number: "14158675309",
+    phone_number: PhonyRails.normalize_number("14158675309"),
     password: "1234",
     password_confirmation: "1234"
   )
