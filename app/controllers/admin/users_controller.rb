@@ -13,7 +13,6 @@ class Admin::UsersController < Admin::BaseController
   end
 
   def show
-    redirect_to edit_admin_user_path(params[:id])
   end
 
   def edit

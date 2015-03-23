@@ -17,8 +17,10 @@ class TwilioController < ApplicationController
   def sms
     sms_body = params["Body"]
     from_number = params["From"]
-    response = Twilio::TwiML::Response.new do |r|
-      r.Message = 'Yay!'
+    user = User.where(:phone_number => from_number)
+    if !user.nil?
+      @message = Admin::Message.new(:user_id => user.id, :received :=> true, :body => sms_body)
+      @message.save!
     end
   end
 end
