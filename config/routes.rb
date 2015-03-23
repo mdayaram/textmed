@@ -13,4 +13,5 @@ Textr::Application.routes.draw do
   end
 
   post 'twilio/voice' => 'twilio#voice'
+  post 'twilio/sms' => 'twilio#sms'
 end
