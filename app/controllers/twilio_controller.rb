@@ -19,7 +19,7 @@ class TwilioController < ApplicationController
     from_number = params["From"]
     user = User.where(:phone_number => from_number)
     if !user.nil?
-      @message = Admin::Message.new do |m|
+      @message = Message.new do |m|
         m.user_id = user.id
         m.received = true
         m.body.body = sms_body
