@@ -29,6 +29,9 @@ gem 'bootstrap-sass', '3.3.3'
 # Phone number validation and formatting
 gem 'phony_rails'
 
+# Twilio integration
+gem 'twilio-ruby'
+
 group :development, :test do
   gem 'byebug', '3.5.1'
   gem 'web-console', '2.1.1'
