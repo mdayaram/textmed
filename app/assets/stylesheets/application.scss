@@ -4,3 +4,11 @@
  *= require_self
  */
 @import "railsbricks_custom";
+
+.msg-sent {
+	background-color: #000000;
+}
+
+.msg-received {
+	background-color: #dddddd;
+}
