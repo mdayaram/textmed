@@ -16,6 +16,16 @@ class Admin::UsersController < Admin::BaseController
     @message = Message.new
   end
 
+  def destroy
+    @user.messages.each do |m|
+      m.destroy
+    end
+    @user.destroy
+    respond_to do |format|
+      format.html { redirect_to admin_users_path, notice: "User #{@user.name} and all associated messages have been deleted."}
+    end
+  end
+
   def edit
   end
 
