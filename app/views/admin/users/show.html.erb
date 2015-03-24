@@ -1,6 +1,6 @@
 <% title("User Id: #{@user.id}") %>
 <div class="row">
-  <div class="col-sm-6">
+  <div class="col-sm-4">
     <h1>
 			<%= @user.name %><br/>
 			<small><%= "#{@user.email}" %></small><br/>
@@ -8,12 +8,13 @@
 		</h1>
 		<p><%= link_to "Edit User", edit_admin_user_path(@user.id) %></p>
     <p><%= link_to "Back to Users", admin_users_path %></p>
-
+    </div>
+    <div class="col-sm-8">
 		<h2>Messages</h2>
 		<table class="table message-table">
 			<thead>
 				<tr>
-					<th>Message</th>
+					<th></th>
 					<th>Date</th>
 				</tr>
 			</thead>
@@ -41,16 +42,14 @@
 			  <% end %>
 
 
-			  <%= hidden_field_tag "user_id", @user.id %><br>
-			  <%= hidden_field_tag "received", false %><br>
+			  <%= hidden_field_tag "message[user_id]", @user.id %><br>
+			  <%= hidden_field_tag "message[received]", false %><br>
 
 			  <div class="message-body">
-			    <%= f.text_field :body %>
-			  </div>
-			  <div class="actions">
-			    <%= f.submit "Send Message" %>
+			    <%= f.text_field :body, placeholder: "Send a new message..." %>
+			    <%= f.submit "Send", :class => "btn btn-info" %>
 			  </div>
 			<% end %>
 		</div>
-  </div>
+	</div>
 </div>
