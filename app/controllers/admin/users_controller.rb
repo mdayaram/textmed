@@ -13,6 +13,7 @@ class Admin::UsersController < Admin::BaseController
   end
 
   def show
+    @message = Message.new
   end
 
   def edit
