@@ -10,7 +10,7 @@
     <p><%= link_to "Back to Users", admin_users_path %></p>
 
 		<h2>Messages</h2>
-		<table>
+		<table class="table">
 			<thead>
 				<tr>
 					<th>Message</th>
@@ -19,7 +19,7 @@
 			</thead>
 			<tbody>
 				<% @user.messages.each do |msg| %>
-					<tr>
+					<tr class="<%= msg.received ? "msg-received" : "msg-sent" %>">
 						<td><%= msg.body %></td>
 						<td><%= localize(msg.created_at, :format => :long) %></td>
 					</tr>
