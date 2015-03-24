@@ -1,0 +1,52 @@
+   <%= form_for [:admin, @user], :html => { :role => "form" } do |f| %>
+    <% if @user.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+        <ul>
+        <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+
+    <%= hidden_field_tag "user[password]", @user.password %>
+    <%= hidden_field_tag "user[password_confirmation]", @user.password_confirmation %>
+    <%= hidden_field_tag "user[admin]", @user.admin %>
+    <%= hidden_field_tag "user[locked]", @user.locked %>
+
+    <div class="form-group">
+      <%= f.label :name %>
+      <div class="row">
+        <div class="col-sm-6">
+          <%= f.text_field :name, class: "form-control" %>
+        </div>
+      </div>
+		</div>
+
+    <div class="form-group">
+      <%= f.label :email %>
+      <div class="row">
+        <div class="col-sm-6">
+          <%= f.email_field :email, class: "form-control" %>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+			<%= f.label :phone_number %>
+      <div class="row">
+        <div class="col-sm-6">
+          <%= f.text_field :phone_number, class: "form-control" %>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-6">
+        <%= f.submit "Update", class: "btn btn-warning" %>
+      </div>
+    </div>
+    <% end %>

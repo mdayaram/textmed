@@ -6,46 +6,12 @@
     </h1>
     <p><%= link_to "Back to User", admin_user_path(@user) %></p>
 
-    <%= form_for [:admin, @user], :html => { :role => "form" } do |f| %>
+ 
+      <%= render 'form' %>
 
 
-    <div class="form-group">
-      <%= f.label :name %>
-      <div class="row">
-        <div class="col-sm-6">
-          <%= f.text_field :name, class: "form-control" %>
-        </div>
-      </div>
-		</div>
-
-    <div class="form-group">
-      <%= f.label :email %>
-      <div class="row">
-        <div class="col-sm-6">
-          <%= f.email_field :email, class: "form-control" %>
-        </div>
-      </div>
-    </div>
-
-    <div class="form-group">
-			<%= f.label :phone_number %>
-      <div class="row">
-        <div class="col-sm-6">
-          <%= f.text_field :phone_number, class: "form-control" %>
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-sm-6">
-        <%= f.submit "Update User", class: "btn btn-warning" %>
-      </div>
       <div class="col-sm-6">
         <a class="btn btn-danger" data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="<%= admin_user_path(@user) %>">Delete User</a>
       </div>
-    </div>
-
-    <% end %>
-
   </div>
 </div>

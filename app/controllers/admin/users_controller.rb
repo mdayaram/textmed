@@ -12,6 +12,28 @@ class Admin::UsersController < Admin::BaseController
     @users = User.search_and_order(params[:search], params[:page])
   end
 
+  def new
+    @user = User.new
+    # Stub info for user that we're not currently using right now.
+    @user.password = "1234"
+    @user.password_confirmation = "1234"
+    @user.admin = false
+    @user.locked = false
+  end
+
+  def create
+    @user = User.new(user_params)
+    @user.skip_confirmation!
+    format_number(@user)
+    respond_to do |format|
+      if @user.save
+        format.html { redirect_to admin_users_path, notice: "#{@user.name} was successfully added." }
+      else
+        format.html { render :new }
+      end
+    end
+  end
+
   def show
     @message = Message.new
   end
@@ -61,6 +83,12 @@ class Admin::UsersController < Admin::BaseController
   rescue
     flash[:alert] = "The user with an id of #{params[:id]} doesn't exist."
     redirect_to admin_users_path
+  end
+
+  def format_number(u)
+    if u.phone_number.length == 10
+      u.phone_number = "+1" + u.phone_number
+    end
   end
 
   def user_params
