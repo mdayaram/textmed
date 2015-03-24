@@ -5,12 +5,8 @@
  */
 @import "railsbricks_custom";
 
-.message-table {
-	tr {
-		td:nth-child(2) {
-			text-align: right;
-		}
-	}
+.message-table > tbody > tr > td.last {
+	text-align: right;
 }
 
 .msg-sent {
