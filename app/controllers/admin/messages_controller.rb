@@ -1,16 +1,4 @@
 class Admin::MessagesController < Admin::BaseController
-  before_action :set_message, only: [:show, :edit, :update, :destroy]
-
-  def index
-    @messages = Message.all
-  end
-
-  def show
-  end
-
-  def new
-    @message = Message.new
-  end
 
   def create
     @message = Message.new(message_params)
@@ -21,19 +9,6 @@ class Admin::MessagesController < Admin::BaseController
         format.html { redirect_to admin_user_path(@message.user), notice: 'Message was successfully sent.' }
       else
         format.html { render :new }
-      end
-    end
-  end
-
-  def update
-    @message.body = message_params[:body]
-    @message.user_id = message_params[:user_id]
-    @message.received = message_params[:received]
-    respond_to do |format|
-      if @message.save
-        format.html { redirect_to admin_message_path(@message), notice: "Saved" }
-      else
-        format.html { render :edit }
       end
     end
   end
