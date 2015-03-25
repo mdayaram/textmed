@@ -28,7 +28,7 @@
     <td><%= user.name %></td>
     <td><%= link_to user.email, admin_user_path(user) %></td>
     <td><%= user.phone_number.phony_formatted unless user.phone_number.nil? %></td>
-		<td><%= user.last_message.nil? ? "none" : localize(user.last_message.created_at, :format => :long) %></td>
+		<td><%= user.last_message.nil? ? "none" : time_ago_in_words(user.last_message.created_at) %></td>
 		<td><%= user.last_message.nil? ? "no" : (user.last_message.received ? "<b>Yes</b>".html_safe : "no" )%></td>
   </tr>
 
