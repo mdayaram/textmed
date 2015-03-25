@@ -61,8 +61,8 @@
       <%= hidden_field_tag "user[password]", @user.password %>
       <%= hidden_field_tag "user[password_confirmation]", @user.password_confirmation %>
     <% end %>
-    <%= hidden_field_tag "user[admin]", @user.admin %>
-    <%= hidden_field_tag "user[locked]", @user.locked %>
+    <%= hidden_field_tag "user[admin]", @user.admin ? 1 : 0 %>
+    <%= hidden_field_tag "user[locked]", @user.locked ? 1 : 0 %>
 
 
     <div class="row">
