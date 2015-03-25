@@ -20,15 +20,15 @@
     <th>Email</th>
     <th>Phone</th>
 		<th>Last Message</th>
-		<th>Replied?</th>
+		<th>Replies</th>
   </tr>
 
   <% @users.each do |user| %>
     <% next if user.admin %>
   <tr>
-    <td><%= user.name %></td>
-    <td><%= link_to user.email, admin_user_path(user) %></td>
-    <td><%= user.phone_number.phony_formatted unless user.phone_number.nil? %></td>
+    <td><%= link_to user.name, admin_user_path(user) %></td>
+    <td><%= user.email %></td>
+    <td><%= user.phone_number.phony_formatted %></td>
 		<td><%= user.last_message.nil? ? "none" : time_ago_in_words(user.last_message.created_at) %></td>
 		<td><%= user.replied? ? "<b>Yes</b>".html_safe : "no" %></td>
   </tr>
