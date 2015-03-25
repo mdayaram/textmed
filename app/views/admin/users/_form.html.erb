@@ -39,7 +39,7 @@
     </div>
 
 
-    <% if @user.admin %>
+    <% if @user.id == current_user.id %>
       <div class="form-group">
         <%= f.label :password %>
         <div class="row">
