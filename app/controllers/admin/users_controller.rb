@@ -9,7 +9,8 @@ class Admin::UsersController < Admin::BaseController
 
 
   def index
-    @users = User.search_and_order(params[:search], params[:page])
+    @users = User.search_and_order(params[:search])
+    @users = @users.sort_by { |u| u.last_message_date! }
   end
 
   def new

@@ -6,9 +6,6 @@ class User < ActiveRecord::Base
   devise :database_authenticatable,
     :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
-  # Pagination
-  paginates_per 100
-
   # Validations
   # :email
   validates_format_of :email, with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
@@ -20,6 +17,18 @@ class User < ActiveRecord::Base
     self[:phone_number] = PhonyRails.normalize_number(new_num)
   end
 
+  def last_message
+    Message.where(user_id: self.id).order(created_at: :desc).first
+  end
+
+  def last_message_date!
+    if last_message.nil?
+      Time.new 0
+    else
+      last_message.created_at
+    end
+  end
+
   def last_sent_message
     Message.where(user_id: self.id, received: false).order(created_at: :desc).first
   end
@@ -28,18 +37,14 @@ class User < ActiveRecord::Base
     Message.where(user_id: self.id, received: true).order(created_at: :desc).first
   end
 
-  def self.paged(page_number)
-    order(admin: :desc, email: :asc).page page_number
-  end
-
-  def self.search_and_order(search, page_number)
+  def self.search_and_order(search)
     if search
       term = "%#{search.downcase}%"
       where("email LIKE ? OR name LIKE ? OR phone_number LIKE ?", term, term, term).order(
         admin: :desc, email: :asc
-      ).page page_number
+      )
     else
-      order(admin: :desc, email: :asc).page page_number
+      order(admin: :desc, email: :asc)
     end
   end
 

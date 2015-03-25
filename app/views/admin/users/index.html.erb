@@ -2,11 +2,6 @@
 <h1>Users <small>Admin</small></h1>
 <p><%= link_to "Back to Admin", admin_root_path %></p>
 
-<div class="text-center">
-  <p><%= page_entries_info @users %></p>
-  <%= paginate @users %>
-</div>
-
 <div style="padding-bottom:40px">
 <%= form_tag admin_users_path, method: 'get', html: {role: "form"} do %>
 <span style="float: left;">
@@ -24,8 +19,8 @@
 		<th>Name</th>
     <th>Email</th>
     <th>Phone</th>
-		<th>Last Contacted At</th>
-		<th>Last Replied At</th>
+		<th>Last Message</th>
+		<th>Replied?</th>
   </tr>
 
   <% @users.each do |user| %>
@@ -33,15 +28,11 @@
     <td><%= user.name %></td>
     <td><%= link_to user.email, admin_user_path(user) %></td>
     <td><%= user.phone_number.phony_formatted unless user.phone_number.nil? %></td>
-		<td><%= user.last_sent_message.nil? ? "none" : localize(user.last_sent_message.created_at, :format => :long) %></td>
-		<td><%= user.last_received_message.nil? ? "none" : localize(user.last_received_message.created_at, :format => :long) %></td>
+		<td><%= user.last_message.nil? ? "none" : localize(user.last_message.created_at, :format => :long) %></td>
+		<td><%= user.last_message.nil? ? "no" : (user.last_message.received ? "<b>Yes</b>".html_safe : "no" )%></td>
   </tr>
 
   <% end %>
 
 </table>
 
-<div class="text-center">
-  <p><%= page_entries_info @users %></p>
-  <%= paginate @users %>
-</div>
