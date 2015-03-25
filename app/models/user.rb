@@ -17,6 +17,10 @@ class User < ActiveRecord::Base
     self[:phone_number] = PhonyRails.normalize_number(new_num)
   end
 
+  def replied?
+    !last_message.nil? && last_message.received
+  end
+
   def last_message
     Message.where(user_id: self.id).order(created_at: :desc).first
   end
