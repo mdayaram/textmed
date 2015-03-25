@@ -25,6 +25,18 @@ class Admin::MessagesController < Admin::BaseController
     end
   end
 
+  def update
+    @message.body = message_params[:body]
+    @message.user_id = message_params[:user_id]
+    @message.received = message_params[:received]
+    respond_to do |format|
+      if @message.save
+        format.html { redirect_to admin_message_path(@message), notice: "Saved" }
+      else
+        format.html { render :edit }
+      end
+    end
+  end
 
   def destroy
     @message.destroy
