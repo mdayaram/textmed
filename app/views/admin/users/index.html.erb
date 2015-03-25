@@ -24,7 +24,6 @@
   </tr>
 
   <% @users.each do |user| %>
-    <% next if user.admin %>
   <tr>
     <td><%= link_to user.name, admin_user_path(user) %></td>
     <td><%= user.email %></td>
