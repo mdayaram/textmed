@@ -12,6 +12,7 @@ class TwilioController < ApplicationController
       r.Say 'Hey there.  Congrats on integrating Twilio into your Rails app', :voice => 'alice'
       r.Play 'http://linode.rabasa.com/cantina.mp3'
     end
+    render :text => ""
   end
 
   def sms
@@ -26,6 +27,6 @@ class TwilioController < ApplicationController
       end
       @message.save!
     end
-    render :text => "ok"
+    render :text => ""
   end
 end
