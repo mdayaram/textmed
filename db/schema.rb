@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150323042408) do
+ActiveRecord::Schema.define(version: 20150328081356) do
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",                      null: false
@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 20150323042408) do
     t.datetime "updated_at"
     t.string   "phone_number"
     t.string   "name"
+    t.string   "group"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
