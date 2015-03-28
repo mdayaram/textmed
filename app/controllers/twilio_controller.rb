@@ -27,6 +27,18 @@ class TwilioController < ApplicationController
       end
       @message.save!
     end
+    send_ack_msg(user, sms_body)
     render :text => ""
+  end
+
+  private
+
+  def admin_user
+    User.where(:admin => true).order(:created_at => :asc).first
+  end
+
+  def send_ack_msg(user, msg)
+    body = "#{user.name} replied: #{msg}"
+    send_sms(admin_user.phone_number, body)
   end
 end

@@ -45,13 +45,4 @@ class Admin::MessagesController < Admin::BaseController
     params.require(:message).permit(:user_id, :received, :body)
   end
 
-  def send_sms(phone_number, sms_body)
-    return unless Rails.env.production?
-    twiclient = Twilio::REST::Client.new
-    twiclient.messages.create(
-      from: ENV["TWILIO_PHONE"],
-      to: phone_number,
-      body: sms_body
-    )
-  end
 end
