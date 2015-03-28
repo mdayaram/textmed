@@ -44,7 +44,7 @@ class User < ActiveRecord::Base
   def self.search_and_order(search)
     if search
       term = "%#{search.downcase}%"
-      where("email LIKE ? OR name LIKE ? OR phone_number LIKE ?", term, term, term).order(
+      where("email LIKE ? OR name LIKE ? OR phone_number LIKE ? OR \"group\" LIKE ?", term, term, term, term).order(
         admin: :desc, email: :asc
       )
     else
