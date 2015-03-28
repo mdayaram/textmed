@@ -17,6 +17,7 @@
 <table class="table table-striped">
   <tr>
 		<th>Name</th>
+		<th>Group</th>
     <th>Email</th>
     <th>Phone</th>
 		<th>Last Message</th>
@@ -26,6 +27,7 @@
   <% @users.each do |user| %>
   <tr>
     <td><%= link_to user.name, admin_user_path(user) %></td>
+		<td><%= user.group %></td>
     <td><%= user.email %></td>
     <td><%= user.phone_number.phony_formatted %></td>
 		<td><%= user.last_message.nil? ? "none" : time_ago_in_words(user.last_message.created_at) %></td>

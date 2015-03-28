@@ -58,6 +58,7 @@ class Admin::UsersController < Admin::BaseController
     new_params[:email] = new_params[:email].strip unless new_params[:email].nil?
 
     @user.email = new_params[:email]
+    @user.group = new_params[:group]
     @user.name = new_params[:name].strip unless new_params[:name].nil?
     @user.phone_number = new_params[:phone_number].strip unless new_params[:phone_number].nil?
     @user.password = new_params[:password] if new_params[:password].strip.length > 0
@@ -97,6 +98,7 @@ class Admin::UsersController < Admin::BaseController
   def user_params
     params.require(:user).permit(
       :name,
+      :group,
       :phone_number,
       :email,
       :password,
