@@ -1,0 +1,3 @@
+<%= CSV.generate_line ['Name', 'Group', 'Email', 'Phone', 'Message Body', 'Sent/Received', 'Date'] -%>
+<%- @messages.each do |msg| -%>
+<%= CSV.generate_line([msg.user.name, msg.user.group, msg.user.email, msg.user.phone_number, msg.body, msg.received ? "received" : "sent", msg.created_at.strftime("%Y-%m-%d %H:%M:%S %Z")]) %><%- end -%>

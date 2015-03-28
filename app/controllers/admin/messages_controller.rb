@@ -1,3 +1,5 @@
+require 'csv'
+
 class Admin::MessagesController < Admin::BaseController
 
   def create
@@ -18,6 +20,17 @@ class Admin::MessagesController < Admin::BaseController
     respond_to do |format|
       format.html { redirect_to admin_messages_url, notice: 'Message was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def index
+    filename = Time.now.strftime("%Y-%m-%dT%H-%M-%S_messages.csv")
+    @messages = Message.all
+    respond_to do |format|
+      format.csv do
+        headers['Content-Disposition'] = "attachment; filename=\"#{filename}\""
+        headers['Content-Type'] ||= 'text/csv'
+      end
     end
   end
 

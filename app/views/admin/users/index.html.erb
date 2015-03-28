@@ -11,6 +11,7 @@
 </span>
 <% end %>
 <span style="float:right;">
+	<%= link_to "Export Messages to CSV", admin_messages_path(format: :csv), {class: "btn btn-sm btn-success"} %>
   <%= link_to "Add User", new_admin_user_path, {class: "btn btn-sm btn-info"} %>
 </span>
 </div>
