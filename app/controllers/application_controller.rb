@@ -52,7 +52,9 @@ class ApplicationController < ActionController::Base
   helper_method :require_admin!
 
   def send_sms(phone_number, sms_body)
+    $stderr.puts "SENDING SMS: #{phone_number} - #{sms_body}"
     return unless Rails.env.production?
+
     twiclient = Twilio::REST::Client.new
     twiclient.messages.create(
       from: ENV["TWILIO_PHONE"],
